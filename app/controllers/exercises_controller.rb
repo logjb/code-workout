@@ -22,7 +22,7 @@ class ExercisesController < ApplicationController
   # -------------------------------------------------------------
   # GET /exercises/download.csv
   def download
-    @exercises = Exercise.accessible_by(current_ability)
+  @exercises = Exercise.accessible_by(current_ability)
 
     respond_to do |format|
       format.csv
@@ -64,10 +64,27 @@ class ExercisesController < ApplicationController
   # -------------------------------------------------------------
   def search
     @terms = escape_javascript(params[:search])
+   
+    @api_call = escape_javascript(params[:api_call])
+	if @api_call.blank?
     @terms = @terms.split(@terms.include?(',') ? /\s*,\s*/ : nil)
+	else
+    @terms= @terms.split(' ')
+    @where_clause = ''
+    @terms.each_with_index do |s, i|
+	#if i == 0
+	#@where_clause += '%'
+	#end 
+	@where_clause += ' ' unless i == 0
+	@where_clause += s
+		end
+	#@where_clause += '%'
+    @terms = [@where_clause]
+	end
     @wos = []
-    @exs = Exercise.search(@terms, current_user)
+    @exs = Exercise.search(@terms, current_user, )
     @msg = ''
+   if @api_call.blank?
     if @exs.blank?
       @msg = 'No exercises were found for your search request. ' \
         'Try these instead...'
@@ -77,10 +94,25 @@ class ExercisesController < ApplicationController
       @msg = 'No public exercises are available to search right now. ' \
         'Wait for contributors to add more.'
     end
-
+   else
+   if @exs.blank?
+	@msg = 'exercise name is free to use'
+	p @msg
+#	render :json => @msg
+   else
+	@exs.each do |x|
+	p x.name
+	end
+	@msg = 'why the hell did it enter in this'
+	p @msg
+#	render :json => @msg
+end
+   end
+#    if @api_call.blank?
     respond_to do |format|
       format.html
       format.js
+ #   end
     end
   end
 
@@ -263,12 +295,17 @@ class ExercisesController < ApplicationController
   # -------------------------------------------------------------
   # POST /exercises/upload_create
   def upload_create
+	puts "got into def upload create"
     if params[:exercise_version] && params[:exercise_version]['text_representation'].present?
+      puts "got to the hash"
       hash = YAML.load(params[:exercise_version]['text_representation'])
     else
-      hash = YAML.load(File.read(params[:form][:file].path))
+     puts Dir.pwd
+     hash = YAML.load(File.read(params[:file]))
+     #hash = YAML.load(File.read(params[:form][:file].path))
     end
-
+	puts "hash:"
+	puts hash
     if !hash.kind_of?(Array)
       hash = [hash]
     end
@@ -276,6 +313,7 @@ class ExercisesController < ApplicationController
     exercises = ExerciseRepresenter.for_collection.new([]).from_hash(hash)
     exercises.each do |e|
       if !e.save
+	puts "cannot save exercise"
         errors = []
         errors <<  "Cannot save exercise:<ul>" 
         e.errors.full_messages.each do |msg|
@@ -283,10 +321,12 @@ class ExercisesController < ApplicationController
         end
         
         if e.current_version
+	puts "current version works"
           e.current_version.errors.full_messages.each do |msg|
             errors << "<li>#{msg}</li>"
           end
           if e.current_version.prompts.any?
+		puts "current version prompts any"
             e.current_version.prompts.first.errors.full_messages.each do |msg|
               errors << "<li>#{msg}</li>"
             end
@@ -296,7 +336,7 @@ class ExercisesController < ApplicationController
         redirect_to exercises_url, flash: { error: errors.join("").html_safe } and return
       end
     end
-
+	puts "successful exercise saved"
     redirect_to exercises_url, flash: { success: 'Exercise saved!' }
   end
 

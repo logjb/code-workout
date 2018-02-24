@@ -6,9 +6,14 @@ class CourseOfferingsController < ApplicationController
   # -------------------------------------------------------------
   # GET /course_offerings
   def index
-    @course_offerings = current_user.managed_course_offerings
-    @lti_launch = params[:lti_launch]
+    @api_call = params[:api_call]
+    if @api_call.blank?
+      @course_offerings = current_user.managed_course_offerings
+      @lti_launch = params[:lti_launch]
+      render layout: 'one_column'
+    else
     render layout: 'one_column'
+    end
   end
 
   # -------------------------------------------------------------

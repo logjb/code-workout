@@ -117,7 +117,7 @@ class Exercise < ActiveRecord::Base
     if r.blank?
       return nil
     end
-    if user
+     if user
       visible = Exercise.visible_to_user(user)
       result = visible.tagged_with(terms, any: true, wild: true, on: :tags) +
         visible.tagged_with(terms, any: true, wild: true, on: :languages) +

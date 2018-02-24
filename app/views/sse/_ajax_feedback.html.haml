@@ -35,6 +35,7 @@
     Your answer has been saved.
 - elsif @exercise_version.is_coding?
   - answer = @attempt.prompt_answers.first.specific
+  %p #{answer.to_yaml}
   - if !answer.error.blank?
     %p Your answer could not be processed because it contains errors:
     .alert.alert-danger{ role: 'alert' }
@@ -51,6 +52,8 @@
       %tbody
         - answer.test_case_results(true).each do |tcr|
           %tr
+            %p answers test case results as tcr
+            %p #{tcr.to_yaml}
             - if tcr.pass
               %td.pass
                 %i.fa.fa-check-square

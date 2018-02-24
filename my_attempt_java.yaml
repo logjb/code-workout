@@ -1,0 +1,42 @@
+---
+  name: API_attempt
+  external_id: API_attempt
+  is_public: true
+  experience: 50
+  language_list: Java
+  style_list: code writing
+  tag_list: conditional
+  current_version:
+    version: 1
+    creator: logan.bull.13@cnu.edu
+    prompts:
+    - coding_prompt:
+        position: 1
+        question: |
+           Write a function that in an integer and outputs that integer
+        class_name: Month
+        method_name: number_returner
+        starter_code: |
+          public int number_returner(int month)
+          {
+              ___
+          }
+        wrapper_code: |
+          public class Month
+          {
+              ___
+
+              public static class Math {}
+              public static class java
+              {
+                  public static class lang
+                  {
+                      public static class Math {}
+                  }
+              }
+          }
+        tests: |
+          "1","1",example
+          "6","6",example
+          "13","13"
+          "11","12",hidden
