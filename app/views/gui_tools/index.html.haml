@@ -1,0 +1,17 @@
+%h1 Listing gui_tools
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @gui_tools.each do |gui_tool|
+    %tr
+      %td= link_to 'Show', gui_tool
+      %td= link_to 'Edit', edit_gui_tool_path(gui_tool)
+      %td= link_to 'Destroy', gui_tool, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Gui tool', new_gui_tool_path

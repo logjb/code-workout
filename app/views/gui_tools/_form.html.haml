@@ -1,0 +1,10 @@
+= form_for @gui_tool do |f|
+  - if @gui_tool.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@gui_tool.errors.count, "error")} prohibited this gui_tool from being saved:"
+      %ul
+        - @gui_tool.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'
