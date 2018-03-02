@@ -2,8 +2,8 @@ class ExercisesController < ApplicationController
   require 'ims/lti'
   require 'oauth/request_proxy/rack_request'
 
-  load_and_authorize_resource
-  skip_authorize_resource only: :practice
+#  load_and_authorize_resource
+ # skip_authorize_resource only: :practice
 
   #~ Action methods ...........................................................
   after_action :allow_iframe, only: [:practice, :embed]
@@ -301,8 +301,8 @@ end
       hash = YAML.load(params[:exercise_version]['text_representation'])
     else
      puts Dir.pwd
-     hash = YAML.load(File.read(params[:file]))
-     #hash = YAML.load(File.read(params[:form][:file].path))
+    hash = YAML.load(File.read(params[:file]))
+    # hash = YAML.load(File.read(params[:form][:file].path))
     end
 	puts "hash:"
 	puts hash

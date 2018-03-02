@@ -36,6 +36,14 @@ RSpec.describe GuiToolsController, :type => :controller do
   # GuiToolsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  describe "GET exercise_content" do
+    it "assigns the requested exercise as @exercise"
+      exercise_content = Exercise.create! valid attributes
+      get :edit, {3 => exercise_content.to_param}, valid_session
+      assigns(:exercise_content).should eq(exercise_content)
+    end
+  end 
+
   describe "GET index" do
     it "assigns all gui_tools as @gui_tools" do
       gui_tool = GuiTool.create! valid_attributes

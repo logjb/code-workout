@@ -9,6 +9,8 @@ describe CoursesController do
         id: 'cs1114',
         organization_id: 'vt')
     end
-
+    it 'routes to #show' do
+      expect(get: '/courses/CNU').to route_to('courses#show')
+    end
   end
 end

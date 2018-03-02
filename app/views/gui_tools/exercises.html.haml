@@ -1,0 +1,5 @@
+- if not(@exs.empty?)
+  %h2 Individual Exercises
+  - @exs.in_groups_of(2, false) do |row|
+    = render row, user: current_user
+    .clearfix

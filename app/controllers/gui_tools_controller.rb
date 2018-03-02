@@ -1,7 +1,26 @@
 class GuiToolsController < ApplicationController
   before_action :set_gui_tool, only: [:show, :edit, :update, :destroy]
-
-  # GET /gui_tools
+  # GET gui_tools/exercises
+  def exercises
+    #render layout: 'one_column'
+	p "it works"
+    @exs = Exercise.publicly_visible.shuffle
+	render :json => @exs
+#    respond_to do |format|
+#	format.html
+#	format.js
+#	end
+  end
+  # POST /gui_tools/exercise_content
+  def exercise_content
+	p params[:id]
+	p "all parameters"
+	p params
+	@exercise = Exercise.find params[:id]
+  	@exercise_version = @exercise.current_version
+	@text_representation = @exercise_version.text_representation || ExerciseRepresenter.new(@exercise).to_hash.to_yaml
+  render :json => @text_representation
+  end
   def index
     @gui_tools = GuiTool.all
   end

@@ -2,6 +2,14 @@ require "rails_helper"
 
 RSpec.describe GuiToolsController, :type => :routing do
   describe "routing" do
+    
+    it "routes to #exercise_content" do
+      expect(:get => "/gui_tools/exercise_content").to route_to("gui_tools#exercise_content")
+    end
+        
+    it "routes to #exercises" do
+      expect(:get => "/gui_tools/exercises").to route_to("gui_tools#exercises")
+    end
 
     it "routes to #index" do
       expect(:get => "/gui_tools").to route_to("gui_tools#index")
