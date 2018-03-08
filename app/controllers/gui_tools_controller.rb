@@ -11,6 +11,19 @@ class GuiToolsController < ApplicationController
 #	format.js
 #	end
   end
+
+  # GET gui_tools/exercise_content
+  def exercise_content
+    #render layout: 'one_column'
+	p "exercise content it works"
+    @exercise = Exercise.find params[:id]
+    render :json => @exercise
+#    respond_to do |format|
+#	format.html
+#	format.js
+#	end
+  end
+	
   # POST /gui_tools/exercise_content
   def exercise_content
 	p params[:id]
@@ -21,6 +34,7 @@ class GuiToolsController < ApplicationController
 	@text_representation = @exercise_version.text_representation || ExerciseRepresenter.new(@exercise).to_hash.to_yaml
   render :json => @text_representation
   end
+	
   def index
     @gui_tools = GuiTool.all
   end
