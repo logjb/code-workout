@@ -31,7 +31,7 @@ class GuiToolsController < ApplicationController
 	p params
 	@exercise = Exercise.find params[:id]
   	@exercise_version = @exercise.current_version
-	@text_representation = @exercise_version.text_representation || ExerciseRepresenter.new(@exercise).to_hash.to_yaml
+	@text_representation = @exercise_version.text_representation || ExerciseRepresenter.new(@exercise).to_hash.to_json
   render :json => @text_representation
   end
 	
