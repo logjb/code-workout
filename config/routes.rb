@@ -6,7 +6,7 @@ CodeWorkout::Application.routes.draw do
 
   #gui tools attemtpi
   get 'gui_tools/exercises' => 'gui_tools#exercises'
-  get 'gui_tools/exercise_content' => 'gui_tools#exercise_content'  
+  post 'gui_tools/exercise_content' => 'gui_tools#exercise_content'  
   post 'lti/assessment'
 
   get 'home' => 'home#index'
