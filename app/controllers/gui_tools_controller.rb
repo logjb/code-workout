@@ -13,16 +13,16 @@ class GuiToolsController < ApplicationController
   end
 
   # GET gui_tools/exercise_content
-  def exercise_content
+  #def exercise_content
     #render layout: 'one_column'
-	p "exercise content it works"
-    @exercise = Exercise.find params[:id]
-    render :json => @exercise
+#	p "exercise content it works"
+ #   @exercise = Exercise.find params[:id]
+ #   render :json => @exercise
 #    respond_to do |format|
 #	format.html
 #	format.js
 #	end
-  end
+#  end
 	
   # POST /gui_tools/exercise_content
   def exercise_content
