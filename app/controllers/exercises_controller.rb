@@ -301,7 +301,8 @@ end
       hash = YAML.load(params[:exercise_version]['text_representation'])
     else
      puts Dir.pwd
-    hash = YAML.load(File.read(params[:file]))
+    #hash = YAML.load(File.read(params[:file]))
+	    hash = YAML.load(File.read(params[:file].path))
     # hash = YAML.load(File.read(params[:form][:file].path))
     end
 	puts "hash:"
