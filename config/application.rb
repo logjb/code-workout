@@ -23,5 +23,11 @@ module CodeWorkout
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    config.middleware.insert_before 0, "Rack::Cors" do
+	    allow do
+		    origins '*'
+		    resource '*', :headers => :any, :methods => [:get, :post, :options]
+		    end
+	  end
   end
 end
