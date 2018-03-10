@@ -1,6 +1,52 @@
 class CwToolsController < ApplicationController
   before_action :set_cw_tool, only: [:show, :edit, :update, :destroy]
 
+	
+  # GET cw_tools/upload_exercise
+  def upload_exercise
+    hash = YAML.load(File.read(params[:file]))
+    
+    if !hash.kind_of?(Array)
+      hash = [hash]
+    end
+    
+    exercises = ExerciseRepresenter.for_collection.new([]).from_hash(hash)
+    exercises.each do |e|
+      if !e.save
+	puts "cannot save exercise"
+        errors = []
+        errors <<  "Cannot save exercise:<ul>" 
+        e.errors.full_messages.each do |msg|
+          errors << "<li>#{msg}</li>"
+        end
+        
+        if e.current_version
+	puts "current version works"
+          e.current_version.errors.full_messages.each do |msg|
+            errors << "<li>#{msg}</li>"
+          end
+          if e.current_version.prompts.any?
+		puts "current version prompts any"
+            e.current_version.prompts.first.errors.full_messages.each do |msg|
+              errors << "<li>#{msg}</li>"
+            end
+          end
+        end
+        errors << "</ul>"
+        redirect_to exercises_url, flash: { error: errors.join("").html_safe } and return
+      end
+    end
+    #render layout: 'one_column'
+	p "it works"
+    @exs = Exercise.publicly_visible.shuffle
+	render :json => @exs
+#    respond_to do |format|
+#	format.html
+#	format.js
+#	end
+  end
+	
+	
   # GET cw_tools/exercises
   def exercises
     #render layout: 'one_column'
