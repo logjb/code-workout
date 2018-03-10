@@ -1,11 +1,11 @@
 class CwToolsController < ApplicationController
-  require 'ims/lti'
-  require 'oauth/request_proxy/rack_request'
+  #require 'ims/lti'
+  #require 'oauth/request_proxy/rack_request'
   before_action :set_cw_tool, only: [:show, :edit, :update, :destroy]
 
 	
-  # GET cw_tools/upload_exercise
-  def upload_create
+  # post cw_tools/upload_exercise
+  def upload_exercise
 	puts "got into def upload create"
     if params[:exercise_version] && params[:exercise_version]['text_representation'].present?
       puts "got to the hash"
