@@ -4,7 +4,7 @@ RSpec.describe CwToolsController, :type => :routing do
   describe "routing" do
 
     it "routes to #upload_exercise" do
-      expect(:put => "/cw_tools/upload_exercise").to route_to("cw_tools#upload_exercise")
+      expect(:get => "/cw_tools/upload_exercise").to route_to("cw_tools#upload_exercise")
     end
     
     it "routes to #exercise_content" do
