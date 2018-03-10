@@ -1,6 +1,29 @@
 class CwToolsController < ApplicationController
   before_action :set_cw_tool, only: [:show, :edit, :update, :destroy]
 
+  # GET cw_tools/exercises
+  def exercises
+    #render layout: 'one_column'
+	p "it works"
+    @exs = Exercise.publicly_visible.shuffle
+	render :json => @exs
+#    respond_to do |format|
+#	format.html
+#	format.js
+#	end
+  end
+
+   # GET /cw_tools/exercise_content
+  def exercise_content
+	p params[:id]
+	p "all parameters"
+	p params
+	@exercise = Exercise.find params[:id]
+  	@exercise_version = @exercise.current_version
+	@text_representation = @exercise_version.text_representation || ExerciseRepresenter.new(@exercise).to_hash.to_json
+  render :json => @text_representation
+  end
+
   # GET /cw_tools
   def index
     @cw_tools = CwTool.all
