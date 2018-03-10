@@ -1,0 +1,17 @@
+%h1 Listing cw_tools
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @cw_tools.each do |cw_tool|
+    %tr
+      %td= link_to 'Show', cw_tool
+      %td= link_to 'Edit', edit_cw_tool_path(cw_tool)
+      %td= link_to 'Destroy', cw_tool, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Cw tool', new_cw_tool_path
