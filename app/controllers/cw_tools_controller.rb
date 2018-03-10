@@ -5,9 +5,19 @@ class CwToolsController < ApplicationController
 
 	
   # GET cw_tools/upload_exercise
-  def upload_exercise
+  def upload_create
+	puts "got into def upload create"
+    if params[:exercise_version] && params[:exercise_version]['text_representation'].present?
+      puts "got to the hash"
+      hash = YAML.load(params[:exercise_version]['text_representation'])
+    else
+     puts Dir.pwd
     hash = YAML.load(File.read(params[:file]))
-    
+	#    hash = YAML.load(File.read(params[:file].path))
+    # hash = YAML.load(File.read(params[:form][:file].path))
+    end
+	puts "hash:"
+	puts hash
     if !hash.kind_of?(Array)
       hash = [hash]
     end
@@ -38,15 +48,10 @@ class CwToolsController < ApplicationController
         redirect_to exercises_url, flash: { error: errors.join("").html_safe } and return
       end
     end
-    #render layout: 'one_column'
-	p "it works"
-    @exs = Exercise.publicly_visible.shuffle
-	render :json => @exs
-#    respond_to do |format|
-#	format.html
-#	format.js
-#	end
+	puts "successful exercise saved"
+    redirect_to exercises_url, flash: { success: 'Exercise saved!' }
   end
+
 	
 	
   # GET cw_tools/exercises
