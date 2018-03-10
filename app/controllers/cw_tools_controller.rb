@@ -1,4 +1,6 @@
 class CwToolsController < ApplicationController
+  require 'ims/lti'
+  require 'oauth/request_proxy/rack_request'
   before_action :set_cw_tool, only: [:show, :edit, :update, :destroy]
 
 	
