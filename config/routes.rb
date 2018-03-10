@@ -4,6 +4,9 @@ CodeWorkout::Application.routes.draw do
 
   post 'lti/launch', as: :lti_launch # => 'workout_offerings#practice', as: :lti_workout_offering_practice
 
+  #cw tools
+  get 'cw_tools/exercises' => 'cw_tools#exercises'
+  get 'cw_tools/exercise_content' => 'cw_tools#exercise_content'
   post 'lti/assessment'
 
   get 'home' => 'home#index'
