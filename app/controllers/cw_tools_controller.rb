@@ -7,7 +7,12 @@ class CwToolsController < ApplicationController
   # post cw_tools/upload_exercise
   def upload_exercise
  	p "ey oh"
-	render :json => "abc"
+	hash = YAML.load(File.read(params[:file]))
+	if !hash.kind_of?(Array)
+     	 hash = [hash]
+    	end
+	exercises = ExerciseRepresenter.for_collection.new([]).from_hash(hash)
+	render :json => "success"
   end
 
 	
