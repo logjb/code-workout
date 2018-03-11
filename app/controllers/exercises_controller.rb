@@ -3,7 +3,7 @@ class ExercisesController < ApplicationController
   require 'oauth/request_proxy/rack_request'
 
   load_and_authorize_resource
-  skip_authorize_resource only: :practice
+  skip_authorize_resource only: [:practice, :upload_create]
 
   #~ Action methods ...........................................................
   after_action :allow_iframe, only: [:practice, :embed]
