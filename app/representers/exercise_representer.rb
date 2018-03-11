@@ -5,9 +5,8 @@ class ExerciseRepresenter < Representable::Decorator
   collection_representer class: Exercise, instance: lambda { |fragment, i, args|
     if fragment.has_key? 'external_id'
       p "inside fragment.haskey"
-      #e = Exercise.where(external_id: fragment['external_id']).first
-      #e || Exercise.new
-      Exercise.new
+      e = Exercise.where(external_id: fragment['external_id']).first
+      e || Exercise.new
     else
       p "inside the else statement"
       Exercise.new
