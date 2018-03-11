@@ -2,7 +2,11 @@ require "rails_helper"
 
 RSpec.describe CwToolsController, :type => :routing do
   describe "routing" do
-
+    
+    it "routes to #workouts" do
+      expect(:get => "/cw_tools/workouts").to route_to("cw_tools#workouts")
+    end
+    
     it "routes to #upload_exercise" do
       expect(:get => "/cw_tools/upload_exercise").to route_to("cw_tools#upload_exercise")
     end
