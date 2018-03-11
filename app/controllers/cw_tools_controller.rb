@@ -4,6 +4,18 @@ class CwToolsController < ApplicationController
   before_action :set_cw_tool, only: [:show, :edit, :update, :destroy]
 
 	
+ # GET cw_tools/workoutss
+  def workouts
+    #render layout: 'one_column'
+	p "it works"
+    @workouts = Workout.where(is_public: true)
+	render :json => @workouts
+#    respond_to do |format|
+#	format.html
+#	format.js
+#	end
+  end
+	
   # post cw_tools/upload_exercise
   def upload_exercise
  	p "ey oh"
