@@ -6,50 +6,7 @@ class CwToolsController < ApplicationController
 	
   # post cw_tools/upload_exercise
   def upload_exercise
-	puts "got into def upload create"
-    if params[:exercise_version] && params[:exercise_version]['text_representation'].present?
-      puts "got to the hash"
-      hash = YAML.load(params[:exercise_version]['text_representation'])
-    else
-     puts Dir.pwd
-    hash = YAML.load(File.read(params[:file]))
-	#    hash = YAML.load(File.read(params[:file].path))
-    # hash = YAML.load(File.read(params[:form][:file].path))
-    end
-	puts "hash:"
-	puts hash
-    if !hash.kind_of?(Array)
-      hash = [hash]
-    end
-    
-    exercises = ExerciseRepresenter.for_collection.new([]).from_hash(hash)
-    exercises.each do |e|
-      if !e.save
-	puts "cannot save exercise"
-        errors = []
-        errors <<  "Cannot save exercise:<ul>" 
-        e.errors.full_messages.each do |msg|
-          errors << "<li>#{msg}</li>"
-        end
-        
-        if e.current_version
-	puts "current version works"
-          e.current_version.errors.full_messages.each do |msg|
-            errors << "<li>#{msg}</li>"
-          end
-          if e.current_version.prompts.any?
-		puts "current version prompts any"
-            e.current_version.prompts.first.errors.full_messages.each do |msg|
-              errors << "<li>#{msg}</li>"
-            end
-          end
-        end
-        errors << "</ul>"
-        redirect_to exercises_url, flash: { error: errors.join("").html_safe } and return
-      end
-    end
-	puts "successful exercise saved"
-    redirect_to exercises_url, flash: { success: 'Exercise saved!' }
+ 	p "ey oh"
   end
 
 	
