@@ -1,17 +1,19 @@
 require 'representable/hash'
 class ExerciseRepresenter < Representable::Decorator
   include Representable::Hash
-
+  p "inside the representers exercise class"
   collection_representer class: Exercise, instance: lambda { |fragment, i, args|
     if fragment.has_key? 'external_id'
+      p "inside fragment.haskey"
       e = Exercise.where(external_id: fragment['external_id']).first
       e || Exercise.new
     else
+      p "inside the else statement"
       Exercise.new
     end
     }
 
-
+  p "evaluates the variables"
   property :name
   property :external_id
   property :is_public, setter: lambda { |val, *| self.is_public = val.to_b }
@@ -42,8 +44,12 @@ class ExerciseRepresenter < Representable::Decorator
     property :creator,
       getter: lambda { |*| creator.andand.email },
       setter: lambda { |val, *|
+        p "print whatever val is"
+        p val
         if val
+          p "looking at the user email"
           self.creator = User.where(email: val).first
+          p "finished looking at the user email"
         end
       }
     property :stem, class: Stem do
