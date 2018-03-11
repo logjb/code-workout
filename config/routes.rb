@@ -8,6 +8,7 @@ CodeWorkout::Application.routes.draw do
   get 'cw_tools/exercises' => 'cw_tools#exercises'
   get 'cw_tools/exercise_content' => 'cw_tools#exercise_content'
   get 'cw_tools/upload_exercise' => 'cw_tools#upload_exercise'
+  get 'cw_tools/workouts' => 'cw_tools#workouts'
   post 'lti/assessment'
 
   get 'home' => 'home#index'
