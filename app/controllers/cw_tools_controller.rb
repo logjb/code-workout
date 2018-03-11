@@ -7,7 +7,7 @@ class CwToolsController < ApplicationController
   # post cw_tools/upload_exercise
   def upload_exercise
  	p "ey oh"
-	hash = YAML.load(File.read(params[:file]))
+	hash = YAML.load(params[:file])
 	if !hash.kind_of?(Array)
      	 hash = [hash]
     	end
