@@ -322,6 +322,10 @@ class WorkoutsController < ApplicationController
     if params[:from_collection].to_b
       workouts = Workout.where('lower(name) = ?', params[:workout_name].downcase)
       found_workout = workouts.andand.first
+      p "found workout"
+	   p found_workout
+      p "workouts"
+	    p workouts.to_yaml
     end
 
     if params[:is_instructor].to_b
