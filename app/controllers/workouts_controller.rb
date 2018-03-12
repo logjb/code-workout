@@ -322,14 +322,11 @@ class WorkoutsController < ApplicationController
     if params[:from_collection].to_b
       workouts = Workout.where('lower(name) = ?', params[:workout_name].downcase)
       found_workout = workouts.andand.first
-      p "found workout"
-	   p found_workout
-      p "workouts"
-	    p workouts.to_yaml
     end
 
     if params[:is_instructor].to_b
-      workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
+      #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
+      workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
       if workout_offerings.blank?
         workout_offerings = WorkoutOffering.where(lms_assignment_id: @custom_canvas_lms_assignment_id)
       end
@@ -411,7 +408,8 @@ class WorkoutsController < ApplicationController
       end
     else
       # first search by lms_assignment_id
-      workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
+      #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
+      workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
       if workout_offerings.blank?
         workout_offerings = WorkoutOffering.where(lms_assignment_id: @custom_canvas_lms_assignment_id)
       end
