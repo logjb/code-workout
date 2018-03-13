@@ -412,8 +412,8 @@ class WorkoutsController < ApplicationController
       end
     else
       # first search by lms_assignment_id
-      #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
-      workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
+      workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
+      #workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
       if workout_offerings.blank?
         workout_offerings = WorkoutOffering.where(lms_assignment_id: @custom_canvas_lms_assignment_id)
       end
