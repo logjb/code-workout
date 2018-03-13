@@ -330,7 +330,7 @@ class WorkoutsController < ApplicationController
 	#      p "no workout found"
       #else
       #workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
-      end
+      #end
       if workout_offerings.blank?
         workout_offerings = WorkoutOffering.where(lms_assignment_id: @custom_canvas_lms_assignment_id)
       end
