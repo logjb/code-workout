@@ -325,11 +325,11 @@ class WorkoutsController < ApplicationController
     end
 
     if params[:is_instructor].to_b
-      #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
-      if found_workout.blank?
-	      p "no workout found"
-      else
-      workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
+      workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
+      #if found_workout.blank?
+	#      p "no workout found"
+      #else
+      #workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
       end
       if workout_offerings.blank?
         workout_offerings = WorkoutOffering.where(lms_assignment_id: @custom_canvas_lms_assignment_id)
