@@ -1,7 +1,7 @@
 $("#saved_assurance").html("")
 $("#exercisefeedback").html("<%= j(render 'ajax_feedback' ) %>")
 
-#attempt_score = <%= JSON.generate @attempt.score %>
+attempt_score = <%= JSON.generate @attempt.score %>
 max_points = <%= JSON.generate  @max_points %>
 
 if attempt_score >= max_points
