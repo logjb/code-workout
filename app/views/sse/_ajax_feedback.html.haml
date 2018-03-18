@@ -1,6 +1,5 @@
 %h2 Feedback
 - show_feedback = !@attempt.workout_score || @attempt.workout_score.show_feedback?
-- show_feedback = false
 - @workout ||= @attempt.workout_score.andand.workout
 - if @workout && show_feedback
   - pts = @workout.exercise_workouts.find_by(exercise: @exercise).andand.points
