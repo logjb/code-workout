@@ -331,7 +331,7 @@ class WorkoutsController < ApplicationController
       else
        workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id, workout_id: found_workout.id)
 	      p "workout offering"
-	      p workout_offering.to_yaml
+	      p workout_offerings.to_yaml
       end     
 #if found_workout.blank?
 	#      p "no workout found"
