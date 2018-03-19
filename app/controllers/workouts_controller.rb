@@ -329,7 +329,7 @@ class WorkoutsController < ApplicationController
       if found_workout.blank?
       workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
       else
-       workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id, workout_id: @found_workout.id)
+       workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id, workout_id: found_workout.id)
       end     
 #if found_workout.blank?
 	#      p "no workout found"
@@ -421,7 +421,7 @@ class WorkoutsController < ApplicationController
       if found_workout.blank?
       workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
       else
-       workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id, workout_id: @found_workout.id)
+       workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id, workout_id: found_workout.id)
       end  	    
       #workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
       if workout_offerings.blank?
