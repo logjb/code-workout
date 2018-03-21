@@ -332,7 +332,7 @@ class WorkoutsController < ApplicationController
       workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
       #      p "workout offering"
       #	      p workout_offerings
-      end     
+      #end     
 #if found_workout.blank?
 	#      p "no workout found"
       #else
