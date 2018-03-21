@@ -548,6 +548,7 @@ class WorkoutsController < ApplicationController
     end
 
     # Reach here only if we have a @workout_offering
+	  p "redirecting to practice path"
     redirect_to organization_workout_offering_practice_path(
       lis_outcome_service_url: params[:lis_outcome_service_url],
       lis_result_sourcedid: params[:lis_result_sourcedid],
