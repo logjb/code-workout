@@ -330,6 +330,10 @@ class WorkoutsController < ApplicationController
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
       #else
       workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
+      p "found workout id 1" 
+      p found_workout.id
+      p "workout offerings 1"
+      p workout_offerings
       #      p "workout offering"
       #	      p workout_offerings
       #end     
@@ -340,11 +344,19 @@ class WorkoutsController < ApplicationController
       #end
       if workout_offerings.blank?
         workout_offerings = WorkoutOffering.where(lms_assignment_id: @custom_canvas_lms_assignment_id)
+	      p "found workout id 2" 
+      p found_workout.id
+      p "workout offerings 2"
+      p workout_offerings
       end
 
       if workout_offerings.blank?
         # check current term
         workout_offerings = @user.managed_workout_offerings_in_term(params[:workout_name].downcase, @course, @term)
+	      p "found workout id 3" 
+      p found_workout.id
+      p "workout offerings 3"
+      p workout_offerings
       end
 
       @workout_offering = workout_offerings.flatten.first
@@ -352,9 +364,17 @@ class WorkoutsController < ApplicationController
       if workout_offerings.blank?
         # check past terms
         workout_offerings = @user.managed_workout_offerings_in_term(params[:workout_name].downcase, @course, nil)
+	      p "found workout id 4" 
+      p found_workout.id
+      p "workout offerings 4"
+      p workout_offerings
       end
 
       workout_offerings = workout_offerings.andand.flatten.uniq
+	    p "found workout id 5" 
+      p found_workout.id
+      p "workout offerings 5"
+      p workout_offerings
       found_workout ||= workout_offerings.andand
         .uniq{ |wo| wo.workout }.andand
         .sort_by{ |wo| wo.course_offering.term.starts_on }.andand
@@ -421,6 +441,10 @@ class WorkoutsController < ApplicationController
       # first search by lms_assignment_id
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
       workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
+	    p "found workout id 6" 
+      p found_workout.id
+      p "workout offerings 6"
+      p workout_offerings
       #if found_workout.blank?
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
       #else
@@ -429,6 +453,10 @@ class WorkoutsController < ApplicationController
       #workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
       if workout_offerings.blank?
         workout_offerings = WorkoutOffering.where(lms_assignment_id: @custom_canvas_lms_assignment_id)
+	      p "found workout id 7" 
+      p found_workout.id
+      p "workout offerings 7"
+      p workout_offerings
       end
       if workout_offerings.blank?
         if params[:label] # label is specified, we can narrow down to a single course offering
@@ -436,6 +464,10 @@ class WorkoutsController < ApplicationController
           if @course_offering
             if params[:from_collection].to_b && found_workout
               workout_offerings = @course_offering.workout_offerings.where(workout: found_workout)
+		    p "found workout id 8" 
+      p found_workout.id
+      p "workout offerings 8"
+      p workout_offerings
               @workout_offering = workout_offerings.first
             end
           else
@@ -496,6 +528,10 @@ class WorkoutsController < ApplicationController
       if !@workout_offering
         # don't have a workout_offering, but may have narrowed it down
         workout_offerings = workout_offerings.flatten.uniq
+	      p "found workout id 10" 
+      p found_workout.id
+      p "workout offerings 10"
+      p workout_offerings
         enrolled_workout_offerings = workout_offerings.andand.select { |wo| @user.is_enrolled?(wo.course_offering) }
 
         if enrolled_workout_offerings.any?
@@ -553,7 +589,7 @@ class WorkoutsController < ApplicationController
     redirect_to organization_workout_offering_practice_path(
       lis_outcome_service_url: params[:lis_outcome_service_url],
       lis_result_sourcedid: params[:lis_result_sourcedid],
-      id: found_workout.id,#@workout_offering.id,
+      id: @workout_offering.id,
       organization_id: params[:organization_id],
       term_id: params[:term_id],
       course_id: params[:course_id],
