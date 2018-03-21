@@ -326,12 +326,12 @@ class WorkoutsController < ApplicationController
 
     if params[:is_instructor].to_b
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)	    
-      if found_workout.blank?
-      workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
-      else
-       workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id, workout_id: found_workout.id)
-	      p "workout offering"
-	      p workout_offerings
+      #if found_workout.blank?
+      #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
+      #else
+      workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
+      #      p "workout offering"
+      #	      p workout_offerings
       end     
 #if found_workout.blank?
 	#      p "no workout found"
@@ -420,11 +420,12 @@ class WorkoutsController < ApplicationController
     else
       # first search by lms_assignment_id
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
-      if found_workout.blank?
-      workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
-      else
-       workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id, workout_id: found_workout.id)
-      end  	    
+      workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
+      #if found_workout.blank?
+      #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
+      #else
+      # workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id, workout_id: found_workout.id)
+      #end  	    
       #workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
       if workout_offerings.blank?
         workout_offerings = WorkoutOffering.where(lms_assignment_id: @custom_canvas_lms_assignment_id)
