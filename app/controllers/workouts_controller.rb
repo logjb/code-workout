@@ -448,6 +448,7 @@ class WorkoutsController < ApplicationController
 	workout_offerings = WorkoutOffering.where(course_offering_id: @course)
       else
         workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
+       end
       #if found_workout.blank?
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
       #else
