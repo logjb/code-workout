@@ -329,11 +329,15 @@ class WorkoutsController < ApplicationController
       #if found_workout.blank?
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
       #else
+      if found_workout.blank?
+	      workout_offerings = WorkoutOffering.where(course_offering_id: @course)
+      else
       workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
       p "found workout id 1" 
       p found_workout.id
       p "workout offerings 1"
-      p workout_offerings
+      p workout_offerings 
+      end
       #      p "workout offering"
       #	      p workout_offerings
       #end     
@@ -440,11 +444,10 @@ class WorkoutsController < ApplicationController
     else
       # first search by lms_assignment_id
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
-      workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
-	    p "found workout id 6" 
-      p found_workout.id
-      p "workout offerings 6"
-      p workout_offerings
+       if found_workout.blank?
+	workout_offerings = WorkoutOffering.where(course_offering_id: @course)
+      else
+        workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
       #if found_workout.blank?
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
       #else
