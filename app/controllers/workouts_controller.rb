@@ -567,7 +567,8 @@ class WorkoutsController < ApplicationController
     #  course_id: params[:course_id],
     #  lti_launch: true
     #)
-    redirect_to workouts, notice: 'Workout not found' and return
+    @message = "The workout named '#{params[:workout_name]}' does not exist or is not linked with this LMS assignment. Please contact your instructor."
+    render 'lti/error' and return
   end
 
   def upload_yaml
