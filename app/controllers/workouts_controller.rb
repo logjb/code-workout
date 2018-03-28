@@ -558,15 +558,23 @@ class WorkoutsController < ApplicationController
 
     # Reach here only if we have a @workout_offering
 	  p "redirecting to practice path"
-    redirect_to organization_workout_offering_practice_path(
-      lis_outcome_service_url: params[:lis_outcome_service_url],
-      lis_result_sourcedid: params[:lis_result_sourcedid],
-      id: @workout_offering.id,
-      organization_id: params[:organization_id],
-      term_id: params[:term_id],
-      course_id: params[:course_id],
-      lti_launch: true
-    )
+    #redirect_to organization_workout_offering_practice_path(
+    #  lis_outcome_service_url: params[:lis_outcome_service_url],
+    #  lis_result_sourcedid: params[:lis_result_sourcedid],
+    #  id: @workout_offering.id,
+    #  organization_id: params[:organization_id],
+    #  term_id: params[:term_id],
+    #  course_id: params[:course_id],
+    #  lti_launch: true
+    #)
+    redirect_to organization_new_or_existing_workout_path(
+              lti_launch: true,
+              organization_id: @course.organization.slug,
+              course_id: @course.slug,
+              term_id: @term.slug,
+              lms_assignment_id: @lms_assignment_id,
+              suggested_name: params[:workout_name]
+          ) and return
   end
 
   def upload_yaml
