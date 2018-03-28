@@ -11,7 +11,7 @@ if attempt_score >= max_points
   $("#primarybtn").removeClass("btn-primary")
   $("#primarybtn").addClass("btn-default")
 
-#$('#sidebar').html("<%= j(render 'layouts/sidebar' ) %>")
+$('#sidebar').html("<%= j(render 'layouts/sidebar' ) %>")
 subbtn = $('.btn-submit')
 if subbtn?
   subbtn.removeAttr('disabled')
