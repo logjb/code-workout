@@ -34,6 +34,7 @@
   - else
     Your answer has been saved.
 - elsif @exercise_version.is_coding?
+  %p #{@attempt.prompt_answers.to_yaml}
   - answer = @attempt.prompt_answers.first.specific
   %p #{answer.to_yaml}
   - if !answer.error.blank?
