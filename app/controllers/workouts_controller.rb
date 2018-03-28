@@ -567,14 +567,7 @@ class WorkoutsController < ApplicationController
     #  course_id: params[:course_id],
     #  lti_launch: true
     #)
-    redirect_to organization_new_or_existing_workout_path(
-              lti_launch: true,
-              organization_id: @course.organization.slug,
-              course_id: @course.slug,
-              term_id: @term.slug,
-              lms_assignment_id: @lms_assignment_id,
-              suggested_name: params[:workout_name]
-          ) and return
+    redirect_to workouts, notice: 'Workout not found' and return
   end
 
   def upload_yaml
