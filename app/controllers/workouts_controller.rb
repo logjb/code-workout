@@ -330,6 +330,8 @@ class WorkoutsController < ApplicationController
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
       #else
       if found_workout.blank?
+	       @message = "The workout named '#{params[:workout_name]}' does not exist or is not linked with this LMS assignment. Please contact your instructor."
+    render 'lti/error' and return
 	      workout_offerings = WorkoutOffering.where(course_offering_id: @course)
       else
       workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
@@ -425,6 +427,8 @@ class WorkoutsController < ApplicationController
       # first search by lms_assignment_id
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)
        if found_workout.blank?
+	        @message = "The workout named '#{params[:workout_name]}' does not exist or is not linked with this LMS assignment. Please contact your instructor."
+    render 'lti/error' and return
 	workout_offerings = WorkoutOffering.where(course_offering_id: @course)
       else
         workout_offerings = WorkoutOffering.where(workout_id: found_workout.id)
@@ -558,17 +562,15 @@ class WorkoutsController < ApplicationController
 
     # Reach here only if we have a @workout_offering
 	  p "redirecting to practice path"
-    #redirect_to organization_workout_offering_practice_path(
-    #  lis_outcome_service_url: params[:lis_outcome_service_url],
-    #  lis_result_sourcedid: params[:lis_result_sourcedid],
-    #  id: @workout_offering.id,
-    #  organization_id: params[:organization_id],
-    #  term_id: params[:term_id],
-    #  course_id: params[:course_id],
-    #  lti_launch: true
-    #)
-    @message = "The workout named '#{params[:workout_name]}' does not exist or is not linked with this LMS assignment. Please contact your instructor."
-    render 'lti/error' and return
+    redirect_to organization_workout_offering_practice_path(
+      lis_outcome_service_url: params[:lis_outcome_service_url],
+      lis_result_sourcedid: params[:lis_result_sourcedid],
+      id: @workout_offering.id,
+      organization_id: params[:organization_id],
+      term_id: params[:term_id],
+      course_id: params[:course_id],
+      lti_launch: true
+    )
   end
 
   def upload_yaml
