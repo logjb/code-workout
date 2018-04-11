@@ -319,10 +319,10 @@ class WorkoutsController < ApplicationController
     @custom_canvas_lms_assignment_id = "#{lms_instance_id}-#{custom_canvas_assignment_id}"
     @lms_assignment_id = "#{lms_instance_id}-#{ext_lti_assignment_id}"
 
-    if params[:from_collection].to_b
+    #if params[:from_collection].to_b
       workouts = Workout.where('lower(name) = ?', params[:workout_name].downcase)
       found_workout = workouts.andand.first
-    end
+    #end
 
     if params[:is_instructor].to_b
       #workout_offerings = WorkoutOffering.where(lms_assignment_id: @lms_assignment_id)	    
